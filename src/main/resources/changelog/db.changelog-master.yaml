@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: changelog/create_table_countries.sql
+  - include:
+      file: changelog/create_table_cities.sql
+  - include:
+      file: changelog/create_table_user.sql

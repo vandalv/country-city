@@ -1,0 +1,57 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.1.1'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.andersen'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.spring.io/milestone' }
+	maven { url 'https://repo.spring.io/snapshot' }
+}
+
+compileJava {
+	options.compilerArgs += [
+			'-Amapstruct.defaultComponentModel=spring',
+			'-Amapstruct.defaultInjectionStrategy=constructor'
+	]
+}
+
+dependencies {
+	implementation(
+			'org.springframework.boot:spring-boot-starter-data-jpa',
+			'org.springframework.boot:spring-boot-starter-web',
+			'org.postgresql:postgresql:42.6.0',
+			'jakarta.validation:jakarta.validation-api',
+			'org.mapstruct:mapstruct:1.5.3.Final',
+			'org.hibernate.validator:hibernate-validator',
+			'org.springframework.boot:spring-boot-starter-security',
+			'org.springframework.security:spring-security-test',
+			'org.springframework.security:spring-security-core',
+			'org.liquibase:liquibase-core',
+			'io.jsonwebtoken:jjwt-api:0.11.5',
+			'io.jsonwebtoken:jjwt-impl:0.11.5',
+			'io.jsonwebtoken:jjwt-jackson:0.11.5',
+			'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4'
+	)
+	testImplementation(
+			'org.springframework.boot:spring-boot-starter-test',
+	)
+	annotationProcessor(
+			'org.springframework.boot:spring-boot-configuration-processor',
+			'org.projectlombok:lombok',
+			'org.mapstruct:mapstruct-processor:1.5.3.Final'
+	)
+	compileOnly 'org.projectlombok:lombok'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

@@ -1,0 +1,52 @@
+spring:
+  application:
+    name: country-city
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+  liquibase:
+    enabled: false
+    change-log: classpath:changelog/db.changelog-master.yaml
+  datasource:
+    url: jdbc:postgresql://${DB_HOST}:5432/${ENV_DB}?stringtype=unspecified
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+server:
+  port: 8731
+  forward-headers-strategy: framework
+
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    config-url: /openapi/swagger-config
+    url: /openapi
+  api-docs:
+    path: /openapi
+
+image:
+  server: ${IMAGE_SERVER}
+
+secrets:
+  jwt-key: ${SECRET_KEY}
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
+
+api:
+  title: Country-City
+  description: country-city-service
+  version: ${API_VERSION}
+  license:
+    name: Apache 2.0
+    url: http://springdoc.org
+  externalDocs:
+    description: Country-City Service Documentation
