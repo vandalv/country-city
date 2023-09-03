@@ -1,4 +1,4 @@
-package com.andersen.countrycity.service.impl.data;
+package com.andersen.countrycity.data;
 
 import com.andersen.countrycity.dto.CityDTO;
 import com.andersen.countrycity.entity.City;
@@ -14,12 +14,13 @@ import org.springframework.data.domain.Pageable;
 
 public class TestDataFactory {
 
+    public static String baseUrl() { return "http://localhost:"; }
+    public static String countryNameParameterValue() { return "France"; }
+
     public static Page<City> cityPage() { return new PageImpl<>(cities(), pageable(), cities().size()); }
     public static Pageable pageable() { return PageRequest.of(0, 10) ;}
     public static List<String> distinctCityNames() { return Arrays.asList("City 1", "City 2", "City 3"); }
-
     public static List<City> cities() { return List.of(city1(), city2(), city3(), city4()) ;}
-
     public static Long cityId() { return 1L ;}
     public static String newName() { return "New city name"; }
     public static String newLogo() { return "new_logo.png"; }

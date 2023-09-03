@@ -5,3 +5,5 @@ databaseChangeLog:
       file: changelog/create_table_cities.sql
   - include:
       file: changelog/create_table_user.sql
+  - include:
+      file: changelog/insert_data.sql

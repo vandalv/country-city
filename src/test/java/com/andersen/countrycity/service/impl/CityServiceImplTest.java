@@ -14,7 +14,7 @@ import com.andersen.countrycity.entity.City;
 import com.andersen.countrycity.exception.CityNotFoundException;
 import com.andersen.countrycity.mapper.CityMapper;
 import com.andersen.countrycity.repository.CityRepository;
-import com.andersen.countrycity.service.impl.data.TestDataFactory;
+import com.andersen.countrycity.data.TestDataFactory;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

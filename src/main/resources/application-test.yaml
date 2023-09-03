@@ -12,9 +12,9 @@ spring:
     enabled: false
     change-log: classpath:changelog/db.changelog-master.yaml
   datasource:
-    url: jdbc:postgresql://${DB_HOST}:5433/${ENV_DB}?stringtype=unspecified
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: jdbc:postgresql://localhost:5433/test?stringtype=unspecified
+    username: postgres
+    password: g2310165
     driver-class-name: org.postgresql.Driver
   sql:
     init:
@@ -35,10 +35,10 @@ springdoc:
     path: /openapi
 
 image:
-  server: ${IMAGE_SERVER}
+  server: https://i.ibb.co/
 
 secrets:
-  jwt-key: ${SECRET_KEY}
+  jwt-key: ecaad53fd5073b6c5f5e588e8c3f1612a13fd4fb29785b8c2f492b19245ab54a
 
 logging:
   level:
@@ -49,7 +49,7 @@ logging:
 api:
   title: Country-City
   description: country-city-service
-  version: ${API_VERSION}
+  version: 1
   license:
     name: Apache 2.0
     url: http://springdoc.org

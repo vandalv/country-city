@@ -9,7 +9,7 @@ import static org.mockito.Mockito.when;
 import com.andersen.countrycity.entity.Role;
 import com.andersen.countrycity.entity.User;
 import com.andersen.countrycity.repository.UserRepository;
-import com.andersen.countrycity.service.impl.data.TestDataFactory;
+import com.andersen.countrycity.data.TestDataFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

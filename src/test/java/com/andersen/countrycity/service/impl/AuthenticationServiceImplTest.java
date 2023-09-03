@@ -13,7 +13,7 @@ import com.andersen.countrycity.dto.AuthenticationResponseDTO;
 import com.andersen.countrycity.entity.User;
 import com.andersen.countrycity.exception.UserNotFoundException;
 import com.andersen.countrycity.repository.UserRepository;
-import com.andersen.countrycity.service.impl.data.TestDataFactory;
+import com.andersen.countrycity.data.TestDataFactory;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
