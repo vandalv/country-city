@@ -12,10 +12,11 @@ Display Unique City Names:
 9. Allow authorized users with the "EDITOR" role to modify city details, including name and logos.
 
 ## Application Build And Run
-Open root folder and run command in terminal:
+Open root folder and run commands in terminal:
 ```sh
  ./gradlew build
 ```
+
 ```sh
 docker-compose up
 ```
