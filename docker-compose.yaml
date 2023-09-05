@@ -16,10 +16,10 @@ services:
 
   application:
     build: .
-    image: country-city
     depends_on:
       - postgres
     environment:
+      TESTCONTAINERS_HOST_OVERRIDE: host.docker.internal
       DB_HOST: host.docker.internal
       ENV_DB: ${ENV_DB}
       DB_USERNAME: ${DB_USERNAME}
@@ -29,3 +29,6 @@ services:
       API_VERSION: ${API_VERSION}
     ports:
       - "8737:8737"
+    volumes:
+      - ./build/libs/country-city-0.0.1-SNAPSHOT.jar:/path/to/container/country-city-0.0.1-SNAPSHOT.jar
+
