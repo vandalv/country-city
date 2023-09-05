@@ -14,6 +14,9 @@ Display Unique City Names:
 ## Application Build And Run
 Open root folder and run command in terminal:
 ```sh
+ ./gradlew build
+```
+```sh
 docker-compose up
 ```
 
