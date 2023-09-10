@@ -9,8 +9,8 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
   liquibase:
-    enabled: false
-    change-log: classpath:changelog/db.changelog-master.yaml
+    enabled: true
+    change-log: classpath:changelog-test/db.changelog-test.yaml
   datasource:
     url: jdbc:postgresql://localhost:5433/test?stringtype=unspecified
     username: postgres

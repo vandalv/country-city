@@ -5,7 +5,9 @@ import com.andersen.countrycity.dto.AuthenticationResponseDTO;
 import com.andersen.countrycity.dto.RegistrationRequestDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -18,7 +20,9 @@ public interface UserController {
             description = "Authenticates a user and returns an authentication response."
     )
     ResponseEntity<AuthenticationResponseDTO> authenticate(
-            @RequestBody AuthenticationRequestDTO authRequest
+            @Valid
+            @RequestBody AuthenticationRequestDTO authRequest,
+            BindingResult bindingResult
     );
 
     @PostMapping("/register")
@@ -26,7 +30,9 @@ public interface UserController {
             summary = "Register User",
             description = "Registers a new user."
     )
-    ResponseEntity<Void> registerUser(
-            @RequestBody RegistrationRequestDTO registrationRequest
+    void registerUser(
+            @Valid
+            @RequestBody RegistrationRequestDTO registrationRequest,
+            BindingResult bindingResult
     );
 }

@@ -23,7 +23,7 @@ public interface CityController {
             summary = "Get Cities Page",
             description = "Retrieve a paginated list of cities."
     )
-            Page<CityDTO> getCitiesPage(
+    ResponseEntity<Page<CityDTO>> getCitiesPage(
             @Parameter(description = "Page number") @RequestParam int page,
             @Parameter(description = "Number of items per page") @RequestParam int size
     );

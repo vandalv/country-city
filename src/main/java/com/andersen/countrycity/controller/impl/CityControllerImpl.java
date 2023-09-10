@@ -28,13 +28,13 @@ public class CityControllerImpl implements CityController {
     private final CityServiceImpl cityServiceImpl;
 
     @GetMapping
-    public Page<CityDTO> getCitiesPage(
+    public ResponseEntity<Page<CityDTO>> getCitiesPage(
             @RequestParam int page,
             @RequestParam int size) {
 
         Pageable pageable = PageRequest.of(page, size, Sort.by("id").ascending());
 
-        return cityServiceImpl.getCitiesPage(pageable);
+        return ResponseEntity.ok(cityServiceImpl.getCitiesPage(pageable));
     }
 
     @GetMapping("/unique")
@@ -58,7 +58,7 @@ public class CityControllerImpl implements CityController {
     }
 
     @PutMapping("/{id}/edit")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequiredRoles("EDITOR")
     public void updateCityNameAndLogo(
             @PathVariable Long id,

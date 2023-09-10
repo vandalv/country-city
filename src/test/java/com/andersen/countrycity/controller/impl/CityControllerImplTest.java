@@ -1,26 +1,26 @@
 package com.andersen.countrycity.controller.impl;
 
+import com.andersen.countrycity.configuration.TestContainerConfiguration;
 import com.andersen.countrycity.data.TestDataFactory;
 import com.andersen.countrycity.dto.AuthenticationRequestDTO;
 import com.andersen.countrycity.dto.AuthenticationResponseDTO;
 import com.andersen.countrycity.dto.CityDTO;
+import com.andersen.countrycity.dto.RegistrationRequestDTO;
+import com.andersen.countrycity.service.UserService;
 import java.util.Arrays;
 import java.util.List;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.reactive.server.EntityExchangeResult;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import org.testcontainers.containers.PostgreSQLContainer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -29,28 +29,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
+@ContextConfiguration(initializers = TestContainerConfiguration.Initializer.class)
 class CityControllerImplTest {
-
-    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(
-            "postgres:latest"
-    ).withInitScript("init.sql");
-
-    @BeforeAll
-    static void beforeAll() {
-        postgres.start();
-    }
-
-    @AfterAll
-    static void afterAll() {
-        postgres.stop();
-    }
-
-    @DynamicPropertySource
-    static void configureProperties(DynamicPropertyRegistry registry) {
-        registry.add("spring.datasource.url", postgres::getJdbcUrl);
-        registry.add("spring.datasource.username", postgres::getUsername);
-        registry.add("spring.datasource.password", postgres::getPassword);
-    }
 
     @LocalServerPort
     private int randomServerPort;
@@ -180,14 +160,33 @@ class CityControllerImplTest {
     }
 
     @Test
-    void updateCityNameAndLogo_WithValidBearerToken_ShouldReturnOk() {
+    void updateCityNameAndLogo_WithValidBearerToken_ShouldReturnNoContent() {
         testUpdateCityWithToken("2@example.com", "12345", 1L, "Paris", "qBw9snD/Szczecin-PL.png",
-                HttpStatus.OK);
+                HttpStatus.NO_CONTENT);
     }
 
     @Test
     void updateCityNameAndLogo_WithInvalidBearerToken_ShouldReturnForbidden() {
         testUpdateCityWithToken("1@example.com", "12345", 1L, "Paris", "qBw9snD/Szczecin-PL.png",
                 HttpStatus.FORBIDDEN);
+    }
+
+    @Test
+    void testRegisterUserWithInvalidInput() {
+
+        String url = baseUrl + "/users/register";
+
+        RegistrationRequestDTO invalidRequest = RegistrationRequestDTO.builder()
+                .email("invalid-email")
+                .password("123")
+                .build();
+
+        webTestClient
+                .post()
+                .uri(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(invalidRequest)
+                .exchange()
+                .expectStatus().isBadRequest();
     }
 }

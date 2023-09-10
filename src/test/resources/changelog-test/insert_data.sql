@@ -1,35 +1,11 @@
-CREATE SCHEMA country_city;
-
-CREATE TABLE IF NOT EXISTS country_city.countries
-(
-    id   SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS country_city.cities
-(
-    id         SERIAL PRIMARY KEY,
-    name       VARCHAR(255) NOT NULL,
-    logo       VARCHAR(255) NOT NULL,
-    country_id INT,
-    FOREIGN KEY (country_id) REFERENCES country_city.countries (id)
-);
-
-CREATE
-TYPE user_role AS ENUM ('USER', 'EDITOR');
-
-CREATE TABLE IF NOT EXISTS country_city.user
-(
-    id       SERIAL PRIMARY KEY,
-    email    VARCHAR(50),
-    password VARCHAR(255),
-    role user_role NOT NULL
-);
+-- Insert Data into the 'countries' table
 
 INSERT INTO country_city.countries (id, name) VALUES (1, 'Poland');
 INSERT INTO country_city.countries (id, name) VALUES (2, 'France');
 INSERT INTO country_city.countries (id, name) VALUES (3, 'UK');
 INSERT INTO country_city.countries (id, name) VALUES (4, 'USA');
+
+-- Insert Data into the 'cities' table
 
 INSERT INTO country_city.cities (id, name, logo, country_id) VALUES (4, 'Pila', 'g3WqxQt/Pila-PL.png', 1);
 INSERT INTO country_city.cities (id, name, logo, country_id) VALUES (5, 'Bytom', '7RDqmK2/Bytom-PL.png', 1);
@@ -47,6 +23,8 @@ INSERT INTO country_city.cities (id, name, logo, country_id) VALUES (14, 'Bath',
 INSERT INTO country_city.cities (id, name, logo, country_id) VALUES (15, 'Birmingham', 'j4DBSqT/Birmingham-UK.png', 3);
 INSERT INTO country_city.cities (id, name, logo, country_id) VALUES (16, 'Paris', '4Z7qm6w/Paris-USA.png', 4);
 INSERT INTO country_city.cities (id, name, logo, country_id) VALUES (1, 'Paris', 'qBw9snD/Szczecin-PL.png', 1);
+
+-- Insert Data into the 'users' table
 
 INSERT INTO country_city."user" (id, email, password, role) VALUES (2, '1@example.com', '$2a$11$BoFt4Pe6NBmTw.GL39rX1OG3p64fqKWmW4MVooILK8zjubNUhsuY2', 'USER');
 INSERT INTO country_city."user" (id, email, password, role) VALUES (3, '2@example.com', '$2a$11$zFqyFQjB3tKhjvVUqSF.3ekzsylSnwSzmOLcNf3h/8e8bnrzwtB3m', 'EDITOR');

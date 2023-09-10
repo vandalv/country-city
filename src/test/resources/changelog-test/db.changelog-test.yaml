@@ -8,4 +8,4 @@ databaseChangeLog:
   - include:
       file: changelog/create_table_user.sql
   - include:
-      file: changelog/insert_data.sql
+      file: changelog-test/insert_data.sql

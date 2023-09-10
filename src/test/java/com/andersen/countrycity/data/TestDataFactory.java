@@ -5,6 +5,8 @@ import com.andersen.countrycity.entity.City;
 import com.andersen.countrycity.entity.Country;
 import com.andersen.countrycity.entity.Role;
 import com.andersen.countrycity.entity.User;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
 import java.util.Arrays;
 import java.util.List;
 import org.springframework.data.domain.Page;
@@ -13,6 +15,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 public class TestDataFactory {
+
+    public static Validator validator() { return Validation.buildDefaultValidatorFactory().getValidator(); }
 
     public static String baseUrl() { return "http://localhost:"; }
     public static String countryNameParameterValue() { return "France"; }
